@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Ai app</string>
+
+
+    <!--CONVERSATION SCREEN-->
+    <string name="input_placeholder">Ask me anything...</string>
+
+
+
+</resources>
