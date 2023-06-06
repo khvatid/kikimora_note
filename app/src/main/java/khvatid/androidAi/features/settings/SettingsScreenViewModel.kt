@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import khvatid.androidAi.domain.usecase.GetIsDynamicThemeUseCase
+import khvatid.androidAi.domain.usecase.SetApiTokenUseCase
 import khvatid.androidAi.domain.usecase.SetIsDynamicThemeUseCase
 import khvatid.androidAi.utils.ViewModelMVI
 import kotlinx.coroutines.Dispatchers
@@ -17,6 +18,7 @@ import javax.inject.Inject
 class SettingsScreenViewModel @Inject constructor(
    private val getIsDynamicThemeUseCase: GetIsDynamicThemeUseCase,
    private val setDynamicThemeUseCase: SetIsDynamicThemeUseCase,
+   private val setApiTokenUseCase: SetApiTokenUseCase,
 ) : ViewModelMVI<SettingsScreenContract.State, SettingsScreenContract.Events>() {
    override val state: MutableStateFlow<SettingsScreenContract.State> = MutableStateFlow(
       SettingsScreenContract.State()
@@ -52,7 +54,9 @@ class SettingsScreenViewModel @Inject constructor(
    }
 
    private fun reduce(event: SettingsScreenContract.Events.AcceptTokenChanged) {
-      TODO("Not yet implemented")
+      viewModelScope.launch {
+         setApiTokenUseCase.execute(state.value.token)
+      }
    }
 
    private fun reduce(event: SettingsScreenContract.Events.UseDynamicTheme) {

@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ConversationRepository {
 
-    suspend fun getAnswer(messageList: List<MessageModel>): Flow<AnswerModel>
+   suspend fun getAnswer(messageList: List<MessageModel>, token: String): Flow<AnswerModel>
 
 
 }

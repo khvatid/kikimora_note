@@ -13,43 +13,48 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
 class ConversationRepositoryImp(
-    private val openAiSource: OpenAiSource,
+   private val openAiSource: OpenAiSource,
 ) : ConversationRepository {
 
-    override suspend fun getAnswer(messageList: List<MessageModel>): Flow<AnswerModel> =
-        callbackFlow {
-            Log.i("REPO", "${messageList.last()}")
-            trySend(AnswerModel.Loading)
-            try {
-                val result =
-                    openAiSource.getLanguageModelResponse(RequestModel(messageList.map { it.toMessage() }))
-                when (result) {
-                    is ResultModel.Failure -> {
-                        trySend(AnswerModel.Error(result.message + result.code))
-                    }
+   override suspend fun getAnswer(
+      messageList: List<MessageModel>,
+      token: String
+   ): Flow<AnswerModel> =
+      callbackFlow {
+         Log.i("REPO", "${messageList.last()}")
+         trySend(AnswerModel.Loading)
+         try {
+            val result =
+               openAiSource.getLanguageModelResponse(
+                  requestModel = RequestModel(messageList.map { it.toMessage() }),
+                  token = token
+               )
+            when (result) {
+               is ResultModel.Failure -> {
+                  trySend(AnswerModel.Error(result.message + result.code))
+               }
 
-                    is ResultModel.Success -> {
-                        trySend(
-                            AnswerModel.Success(
-                                result.data?.toMessageModel() ?: throw NullPointerException()
-                            )
-                        )
-                    }
-                    else -> {}
-                }
-            } catch (e: Exception) {
-                trySend(AnswerModel.Error("${e.message}"))
+               is ResultModel.Success -> {
+                  trySend(
+                     AnswerModel.Success(
+                        result.data?.toMessageModel() ?: throw NullPointerException()
+                     )
+                  )
+               }
             }
-            close()
-        }
+         } catch (e: Exception) {
+            trySend(AnswerModel.Error("${e.message}"))
+         }
+         close()
+      }
 
 
-    private fun GptResponseModel.toMessageModel(): MessageModel {
-        val message = this.choices[0].message
-        return MessageModel(content = message.content, role = message.role)
-    }
+   private fun GptResponseModel.toMessageModel(): MessageModel {
+      val message = this.choices[0].message
+      return MessageModel(content = message.content, role = message.role)
+   }
 
-    private fun MessageModel.toMessage(): Message {
-        return Message(content = content, role = role)
-    }
+   private fun MessageModel.toMessage(): Message {
+      return Message(content = content, role = role)
+   }
 }

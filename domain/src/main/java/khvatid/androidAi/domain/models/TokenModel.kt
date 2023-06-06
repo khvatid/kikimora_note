@@ -1,3 +1,11 @@
 package khvatid.androidAi.domain.models
 
-data class TokenModel(val value: String)
+sealed class TokenModel(private val token: String) {
+   data class Token(val token: String) : TokenModel(token = token)
+   data class TokenWithProvider(val token: String, val apiProvider: ApiProvider) : TokenModel(token)
+
+   sealed class ApiProvider(){
+      object OpenAiApi: ApiProvider()
+   }
+}
+
