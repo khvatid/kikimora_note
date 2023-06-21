@@ -2,7 +2,7 @@ import org.gradle.api.JavaVersion
 
 object AndroidConfig {
 
-    const val namespace : String = "khvatid.androidAi"
+    const val namespace : String = "khvatid.kikimora"
 
     object Sdk{
         const val compile : Int = 33

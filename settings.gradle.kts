@@ -12,7 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "AndroidAi"
+rootProject.name = "Kikimora"
 include(":app")
 include(":data")
 include(":domain")
