@@ -1,4 +1,4 @@
-package khvatid.kikimora.features.conversation
+package khvatid.kikimora.features.conversations
 
 
 import android.util.Log

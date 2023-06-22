@@ -1,4 +1,4 @@
-package khvatid.kikimora.features.conversation
+package khvatid.kikimora.features.conversations
 
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Stable

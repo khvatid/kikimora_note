@@ -23,6 +23,8 @@ interface AppContract {
 
    sealed class Event {
       object NavigateToSettings : Event()
+
+      data class NavigateToConversation(val id: String): Event()
       object NavigateToHome : Event()
    }
 

@@ -38,9 +38,13 @@ private fun AppScreenUi(state: AppContract.State, events: (AppContract.Event) ->
                .padding(it)
                .consumeWindowInsets(it),
             navController = state.navController,
-            startDestination = AppDestination.ListConversations(),
+            startDestination = AppDestination.ConversationList(),
          ) {
-            appNavigationGraph()
+            appNavigationGraph(
+               navigateToConversation = { id ->
+                  events(AppContract.Event.NavigateToConversation(id))
+               }
+            )
          }
       }
    )

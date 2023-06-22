@@ -5,16 +5,19 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import khvatid.kikimora.features.conversation.ConversationScreen
+import khvatid.kikimora.features.conversations.ConversationScreen
+import khvatid.kikimora.features.conversations.list.ConversationListScreen
 import khvatid.kikimora.features.notes.NotesScreen
 import khvatid.kikimora.features.settings.SettingsScreen
 
 
-fun NavGraphBuilder.appNavigationGraph() {
+fun NavGraphBuilder.appNavigationGraph(
+   navigateToConversation: (String) -> Unit
+) {
    composable(route = AppDestination.Settings()) {
       SettingsScreen(viewModel = hiltViewModel())
    }
-   composable(route = AppDestination.ListNotes()) {
+   composable(route = AppDestination.NoteList()) {
       NotesScreen(viewModel = hiltViewModel())
    }
    composable(
@@ -23,7 +26,10 @@ fun NavGraphBuilder.appNavigationGraph() {
    ) {
       ConversationScreen(viewModel = hiltViewModel())
    }
-   composable(route = AppDestination.ListConversations()) {
-
+   composable(route = AppDestination.ConversationList()) {
+      ConversationListScreen(
+         viewModel = hiltViewModel(),
+         navigateToConversation = navigateToConversation
+      )
    }
 }

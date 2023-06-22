@@ -1,4 +1,4 @@
-package khvatid.kikimora.features.conversation
+package khvatid.kikimora.features.conversations
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,8 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import khvatid.kikimora.R
-import khvatid.kikimora.features.conversation.ConversationScreenContract.Event
-import khvatid.kikimora.features.conversation.ConversationScreenContract.State
+import khvatid.kikimora.features.conversations.ConversationScreenContract.Event
+import khvatid.kikimora.features.conversations.ConversationScreenContract.State
 import khvatid.kikimora.ui.components.InputBar
 import khvatid.kikimora.ui.components.Messages
 

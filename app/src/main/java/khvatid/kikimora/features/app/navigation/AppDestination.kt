@@ -16,9 +16,8 @@ sealed class AppDestination(protected val route:String) {
    }
 
    object Settings: NoArgumentsDestination(route = "settings")
-   object ListConversations: NoArgumentsDestination(route = "conversations")
-   object ListNotes: NoArgumentsDestination(route = "notes")
-   data class Note(val id: String): AppDestination(route = "${ListNotes()}/id=$id")
-
-   data class Conversation(private val id: String = "0"): AppDestination(route = "${ListConversations()}/id=$id")
+   object ConversationList: NoArgumentsDestination(route = "conversations")
+   data class Conversation(private val id: String = "0"): AppDestination(route = "${ConversationList()}/id=$id")
+   object NoteList: NoArgumentsDestination(route = "notes")
+   data class Note(val id: String): AppDestination(route = "${NoteList()}/id=$id")
 }
