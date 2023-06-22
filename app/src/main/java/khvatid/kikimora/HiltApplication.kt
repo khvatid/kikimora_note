@@ -1,4 +1,4 @@
-package khvatid.kikimora.app
+package khvatid.kikimora
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

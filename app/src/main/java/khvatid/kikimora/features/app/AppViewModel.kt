@@ -1,4 +1,4 @@
-package khvatid.kikimora.app
+package khvatid.kikimora.features.app
 
 
 import androidx.lifecycle.viewModelScope
@@ -8,6 +8,7 @@ import khvatid.kikimora.domain.usecase.GetIsDynamicThemeUseCase
 import khvatid.kikimora.utils.ViewModelMVI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,7 +25,9 @@ class AppViewModel @Inject constructor(
     init {
         viewModelScope.launch(Dispatchers.IO) {
             getIsDynamicThemeUseCase.execute().collect {
-                state.compareAndSet(state.value, state.value.copy(isDynamicTheme = it))
+                state.update { appState ->
+                    appState.copy(isDynamicTheme = it)
+                }
             }
         }
     }
@@ -40,7 +43,6 @@ class AppViewModel @Inject constructor(
 
     private fun reduce(event: AppContract.Event.NavigateToSettings) {
         state.value.navController.navigate("settings")
-        //state.compareAndSet(state.value, state.value.copy(showAppBar = false))
     }
 
 }
