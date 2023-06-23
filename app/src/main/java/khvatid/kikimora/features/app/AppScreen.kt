@@ -14,38 +14,46 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import khvatid.kikimora.features.app.navigation.AppDestination
+import khvatid.kikimora.features.app.navigation.BottomNavigationBar
 import khvatid.kikimora.features.app.navigation.appNavigationGraph
 import khvatid.kikimora.ui.theme.AiTheme
 
 @Composable
 fun AppScreen(viewModel: AppViewModel) {
-   val state by viewModel.uiState.collectAsState()
-   AiTheme(dynamicColor = state.isDynamicTheme) {
-      AppScreenUi(state = state, events = viewModel::obtainEvent)
-   }
+    val state by viewModel.uiState.collectAsState()
+    AiTheme(dynamicColor = state.isDynamicTheme) {
+        AppScreenUi(state = state, events = viewModel::obtainEvent)
+    }
 }
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
 private fun AppScreenUi(state: AppContract.State, events: (AppContract.Event) -> Unit) {
-   Scaffold(
-      bottomBar = {},
-      contentWindowInsets = WindowInsets(0.dp, 0.dp, 0.dp, 0.dp),
-      content = {
-         NavHost(
-            modifier = Modifier
-               .fillMaxSize()
-               .padding(it)
-               .consumeWindowInsets(it),
-            navController = state.navController,
-            startDestination = AppDestination.ConversationList(),
-         ) {
-            appNavigationGraph(
-               navigateToConversation = { id ->
-                  events(AppContract.Event.NavigateToConversation(id))
-               }
+    Scaffold(
+        bottomBar = {
+            BottomNavigationBar(
+                tabs = state.tabs,
+                currentRoute = state.currentRoute,
+                isShow = state.isShowBottomBar,
+                tabClick = { events(AppContract.Event.BottomBarClick(it)) }
             )
-         }
-      }
-   )
+        },
+        contentWindowInsets = WindowInsets(0.dp, 0.dp, 0.dp, 0.dp),
+        content = {
+            NavHost(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(it)
+                    .consumeWindowInsets(it),
+                navController = state.navController,
+                startDestination = AppDestination.ConversationList(),
+            ) {
+                appNavigationGraph(
+                    navigateToConversation = { id ->
+                        events(AppContract.Event.NavigateToConversation(id))
+                    }
+                )
+            }
+        }
+    )
 }

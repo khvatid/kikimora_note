@@ -3,8 +3,12 @@
 
 
     <!--CONVERSATION SCREEN-->
-    <string name="input_placeholder">Ask me anything...</string>
+    <string name="input_placeholder">Ask me anything…</string>
 
+    <!-- BOTTOM NAVIGATION LABELS -->
+    <string name="destination_settings_label">Settings </string>
+    <string name="destination_conversations_label">Conversations </string>
+    <string name="destination_notes_label">Notes </string>
 
 
 </resources>

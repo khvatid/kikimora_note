@@ -15,43 +15,55 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AppViewModel @Inject constructor(
-   navHostController: NavHostController,
-   private val getIsDynamicThemeUseCase: GetIsDynamicThemeUseCase
+    navHostController: NavHostController,
+    private val getIsDynamicThemeUseCase: GetIsDynamicThemeUseCase
 ) : ViewModelMVI<AppContract.State, AppContract.Event>() {
 
 
-   override val state: MutableStateFlow<AppContract.State> =
-      MutableStateFlow(AppContract.State(navController = navHostController))
+    override val state: MutableStateFlow<AppContract.State> =
+        MutableStateFlow(AppContract.State(navController = navHostController))
 
-   init {
-      viewModelScope.launch(Dispatchers.IO) {
-         getIsDynamicThemeUseCase.execute().collect {
-            state.update { appState ->
-               appState.copy(isDynamicTheme = it)
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            getIsDynamicThemeUseCase.execute().collect {
+                state.update { appState ->
+                    appState.copy(isDynamicTheme = it)
+                }
             }
-         }
-      }
-   }
+        }
+    }
 
-   override fun obtainEvent(event: AppContract.Event) {
-      when (event) {
-         is AppContract.Event.NavigateToHome -> TODO()
-         is AppContract.Event.NavigateToSettings -> {
-            reduce(event)
-         }
+    override fun obtainEvent(event: AppContract.Event) {
+        when (event) {
+            is AppContract.Event.NavigateToConversation -> {
+                reduce(event)
+            }
 
-         is AppContract.Event.NavigateToConversation -> {
-            reduce(event)
-         }
-      }
-   }
+            is AppContract.Event.BottomBarClick -> {
+                reduce(event)
+            }
+        }
+    }
 
-   private fun reduce(event: AppContract.Event.NavigateToConversation) {
-      state.value.navController.navigate(AppDestination.Conversation(event.id).fullRoute)
-   }
+    private fun reduce(event: AppContract.Event.BottomBarClick) {
+        if (state.value.route != event.route){
+            state.value.bottomBarNavigate(event.route)
+        }
+    }
 
-   private fun reduce(event: AppContract.Event.NavigateToSettings) {
-      state.value.navController.navigate("settings")
-   }
+    private fun reduce(event: AppContract.Event.NavigateToConversation) {
+        state.value.navController.navigate(AppDestination.Conversation(event.id).fullRoute)
+    }
+
+    private fun AppContract.State.bottomBarNavigate(route: String){
+        this.navController.navigate(
+            route = route
+        ){
+            launchSingleTop = true
+            popUpTo(0) {
+                inclusive = true
+            }
+        }
+    }
 
 }

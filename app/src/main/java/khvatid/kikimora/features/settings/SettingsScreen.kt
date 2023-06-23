@@ -3,6 +3,7 @@ package khvatid.kikimora.features.settings
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.Button
@@ -29,7 +30,7 @@ private fun SettingsScreenUi(
    state: SettingsScreenContract.State,
    events: (Events) -> Unit
 ) {
-   Column {
+   Column(modifier = Modifier.systemBarsPadding()) {
       Row {
          TextField(
             value = state.token,
