@@ -17,7 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import khvatid.kikimora.ui.theme.spaceMono
+import khvatid.core.ui.theme.spaceMono
 
 @Composable
 fun AppTopBar(menuClick: ()->Unit, settingsClick: ()->Unit) {

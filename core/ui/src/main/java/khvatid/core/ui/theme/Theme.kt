@@ -1,8 +1,9 @@
-package khvatid.kikimora.ui.theme
+package khvatid.core.ui.theme
 
 import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -16,7 +17,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-private val lightColors = lightColorScheme(
+private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
     primaryContainer = md_theme_light_primaryContainer,
@@ -35,6 +36,10 @@ private val lightColors = lightColorScheme(
     onErrorContainer = md_theme_light_onErrorContainer,
     background = md_theme_light_background,
     onBackground = md_theme_light_onBackground,
+    surface = md_theme_light_surface,
+    onSurface = md_theme_light_onSurface,
+    surfaceVariant = md_theme_light_surfaceVariant,
+    onSurfaceVariant = md_theme_light_onSurfaceVariant,
     outline = md_theme_light_outline,
     inverseOnSurface = md_theme_light_inverseOnSurface,
     inverseSurface = md_theme_light_inverseSurface,
@@ -42,14 +47,10 @@ private val lightColors = lightColorScheme(
     surfaceTint = md_theme_light_surfaceTint,
     outlineVariant = md_theme_light_outlineVariant,
     scrim = md_theme_light_scrim,
-    surface = md_theme_light_surface,
-    onSurface = md_theme_light_onSurface,
-    surfaceVariant = md_theme_light_surfaceVariant,
-    onSurfaceVariant = md_theme_light_onSurfaceVariant,
 )
 
 
-private val darkColors = darkColorScheme(
+private val DarkColors = darkColorScheme(
     primary = md_theme_dark_primary,
     onPrimary = md_theme_dark_onPrimary,
     primaryContainer = md_theme_dark_primaryContainer,
@@ -68,6 +69,10 @@ private val darkColors = darkColorScheme(
     onErrorContainer = md_theme_dark_onErrorContainer,
     background = md_theme_dark_background,
     onBackground = md_theme_dark_onBackground,
+    surface = md_theme_dark_surface,
+    onSurface = md_theme_dark_onSurface,
+    surfaceVariant = md_theme_dark_surfaceVariant,
+    onSurfaceVariant = md_theme_dark_onSurfaceVariant,
     outline = md_theme_dark_outline,
     inverseOnSurface = md_theme_dark_inverseOnSurface,
     inverseSurface = md_theme_dark_inverseSurface,
@@ -75,17 +80,15 @@ private val darkColors = darkColorScheme(
     surfaceTint = md_theme_dark_surfaceTint,
     outlineVariant = md_theme_dark_outlineVariant,
     scrim = md_theme_dark_scrim,
-    surface = md_theme_dark_surface,
-    onSurface = md_theme_dark_onSurface,
-    surfaceVariant = md_theme_dark_surfaceVariant,
-    onSurfaceVariant = md_theme_dark_onSurfaceVariant
 )
 
+
 @Composable
-fun AiTheme(
+fun CoreTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
+    lightColors: ColorScheme = LightColors,
+    darkColors: ColorScheme = DarkColors,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -93,30 +96,28 @@ fun AiTheme(
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
+
         darkTheme -> darkColors
         else -> lightColors
     }
     val view = LocalView.current
     if (!view.isInEditMode) {
-        val currentWindow = (view.context as Activity).window
-            ?: throw Exception("Not in an activity - unable to get Window reference")
-        SideEffect {
-            WindowCompat.getInsetsController(currentWindow, view).isAppearanceLightStatusBars =
-                !darkTheme
-            WindowCompat.setDecorFitsSystemWindows(currentWindow, false)
-            currentWindow.statusBarColor = Color.Transparent.toArgb()
-            currentWindow.navigationBarColor = Color.Unspecified.toArgb()
-
-
-            //.statusBarColor = colorScheme.background.toArgb()
-            //(view.context as Activity).window.isStatusBarContrastEnforced = true
-            // ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = darkTheme
+        if (!view.isInEditMode) {
+            val currentWindow = (view.context as Activity).window
+                ?: throw Exception("Not in an activity - unable to get Window reference")
+            SideEffect {
+                WindowCompat.getInsetsController(currentWindow, view).isAppearanceLightStatusBars =
+                    !darkTheme
+                WindowCompat.setDecorFitsSystemWindows(currentWindow, false)
+                currentWindow.statusBarColor = Color.Transparent.toArgb()
+                currentWindow.navigationBarColor = Color.Unspecified.toArgb()
+            }
         }
     }
 
     MaterialTheme(
         colorScheme = colorScheme,
-        //typography = Typography,
+        typography = Typography,
         content = content
     )
 }

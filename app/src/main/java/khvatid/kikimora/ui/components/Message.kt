@@ -27,8 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import khvatid.core.ui.theme.spaceMono
 import khvatid.kikimora.domain.models.MessageModel
-import khvatid.kikimora.ui.theme.spaceMono
 
 
 @Composable

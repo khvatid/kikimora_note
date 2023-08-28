@@ -54,8 +54,10 @@ android {
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":data")))
-    implementation(project(mapOf("path" to ":domain")))
+    implementation(project(":data"))
+    implementation(project(":domain"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:navigation"))
 
     implementation(libs.androidCore.ktx)
     implementation(libs.androidStartUp.runtime)
@@ -66,19 +68,12 @@ dependencies {
     implementation(libs.androidLifecycle.viewModelCompose)
 
 
-    //Compose x Coil
-    implementation(libs.bundles.composeBundle)
+    //Compose
+    implementation(libs.bundles.composeAppBundle)
     debugImplementation(libs.bundles.composeDebugTestBundle)
 
     //Hilt
     kapt(libs.dagger.hiltAndroidCompiler)
     implementation(libs.dagger.hiltAndroid)
     implementation(libs.androidHilt.navigationCompose)
-
-    implementation(libs.androidRoom.runtime)
-    implementation(libs.androidRoom.ktx)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.espresso.core)
-    androidTestImplementation(libs.androidx.test.ext.junit)
 }

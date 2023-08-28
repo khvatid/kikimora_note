@@ -5,19 +5,20 @@ plugins {
 }
 
 android {
-    namespace = AndroidConfig.namespace+".domain"
-    compileSdk = AndroidConfig.Sdk.compile
+    namespace = "khvatid.core.navigation"
+    compileSdk = 33
     compileOptions {
-        sourceCompatibility = AndroidConfig.javaVersion
-        targetCompatibility = AndroidConfig.javaVersion
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = AndroidConfig.jvmTarget
+        jvmTarget = "17"
     }
 }
 
 dependencies {
     implementation(libs.androidCore.ktx)
-    implementation(libs.kotlinx.coroutines.android)
+
+    implementation(libs.androidNavigation.compose)
 
 }

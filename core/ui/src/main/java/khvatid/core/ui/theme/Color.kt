@@ -1,4 +1,4 @@
-package khvatid.kikimora.ui.theme
+package khvatid.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
@@ -63,6 +63,3 @@ val md_theme_dark_surface = Color(0xFF111416)
 val md_theme_dark_onSurface = Color(0xFFC5C6C9)
 val md_theme_dark_surfaceVariant = Color(0xFF42474E)
 val md_theme_dark_onSurfaceVariant = Color(0xFFC2C7CF)
-
-
-//val seed = Color(0xFFE19F00)
