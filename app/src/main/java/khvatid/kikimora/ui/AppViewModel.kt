@@ -16,4 +16,5 @@ class AppViewModel @Inject constructor(
         MutableStateFlow(AppScreenState(navController))
     val state: StateFlow<AppScreenState> get() = _state
 
+
 }

@@ -10,7 +10,7 @@ import khvatid.core.ui.theme.CoreTheme
 
 
 data class AppScreenState(
-    internal val navController: NavHostController,
+    val navController: NavHostController,
     val startDestination: NavigationFlow = NavigationFlow.Notes,
 )
 
