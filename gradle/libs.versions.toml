@@ -10,6 +10,7 @@ androidHiltNavigation = "1.0.0"
 androidRoom = "2.5.1"
 androidStartUp = "1.1.1"
 appcompat = "1.6.1"
+splashscreen = "1.1.0-alpha01"
 
 composeCompiler = "1.4.4"
 composeVersion = "1.4.0"
@@ -32,11 +33,13 @@ material = "1.8.0"
 
 [libraries]
 androidCore-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidCoreKtx" }
+androidCore-Splashscreen = {group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen"}
 androidActivity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidActivity" }
 androidNavigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidNavigation" }
 androidHilt-navigationCompose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidHiltNavigation" }
 androidStartUp-runtime = { group = "androidx.startup", name = "startup-runtime", version.ref = "androidStartUp" }
 androidAppcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+
 
 androidLifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidLifecycle" }
 androidLifecycle-runtimeKtx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidLifecycle" }

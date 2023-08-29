@@ -60,6 +60,7 @@ dependencies {
     implementation(project(":core:navigation"))
 
     implementation(libs.androidCore.ktx)
+    implementation(libs.androidCore.splashscreen)
     implementation(libs.androidStartUp.runtime)
     implementation(libs.kotlinx.coroutines.android)
 

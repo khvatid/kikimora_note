@@ -4,9 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import dagger.hilt.android.AndroidEntryPoint
-import khvatid.kikimora.features.app.AppScreen
-import khvatid.kikimora.features.app.AppViewModel
+import khvatid.core.ui.theme.CoreTheme
+import khvatid.kikimora.ui.AppViewModel
 
 
 @AndroidEntryPoint
@@ -17,8 +18,11 @@ class AppActivity : ComponentActivity() {
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
       setContent {
-         AppScreen(viewModel = viewModel)
+         CoreTheme {
+
+         }
       }
+
    }
 
    override fun onStart() {

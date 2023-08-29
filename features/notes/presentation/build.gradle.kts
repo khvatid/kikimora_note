@@ -1,16 +1,16 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
+    kotlin("kapt")
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
 }
 
 android {
-    namespace = "khvatid.kikimora.notes.presentation"
-    compileSdk = 33
+    namespace = AndroidConfig.namespace+".notes.presentation"
+    compileSdk = AndroidConfig.Sdk.compile
 
     defaultConfig {
-        minSdk = 27
-
+        minSdk = AndroidConfig.Sdk.min
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -24,21 +24,35 @@ android {
             )
         }
     }
+    buildFeatures{
+        compose = true
+    }
+    composeOptions{
+        kotlinCompilerExtensionVersion = "1.4.4"
+    }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = AndroidConfig.javaVersion
+        targetCompatibility = AndroidConfig.javaVersion
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = AndroidConfig.jvmTarget
     }
 }
 
 dependencies {
-
     implementation(libs.androidCore.ktx)
     implementation(libs.androidAppcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.espresso.core)
+
+    kapt(libs.dagger.hiltAndroidCompiler)
+    implementation(libs.dagger.hiltAndroid)
+    implementation(libs.androidHilt.navigationCompose)
+
+    //Compose x Coil
+    implementation(libs.androidCompose.ui)
+    implementation(libs.androidCompose.material3)
+    implementation(libs.androidCompose.tooling)
+
+    implementation(project(":core:navigation"))
+    implementation(project(":core:ui"))
 }

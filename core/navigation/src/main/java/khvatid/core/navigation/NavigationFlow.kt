@@ -1,24 +1,11 @@
-package ru.khvatid.core.navigation
+package khvatid.core.navigation
 
-sealed class NavigationFlow(protected val route: String) {
+sealed class NavigationFlow(private val route: String) {
 
-    val fullRoute: String = route
+    object Notes : NavigationFlow(route = "notes_flow")
+    object Settings : NavigationFlow(route = "settings_flow")
 
-    sealed class NoArgsDestination(
-        route: String
-    ) : NavigationFlow(route) {
-        operator fun invoke(): String = route
+    operator fun invoke(): String {
+        return route
     }
-
-
-    sealed class NotesNavigation() {
-        object List : NoArgsDestination(route = "list")
-        data class Detail(private val id: String = "{id}") :
-            NavigationFlow(route = "${List()}/$id")
-
-        companion object {
-            const val graphName: String = "notes"
-        }
-    }
-
 }
