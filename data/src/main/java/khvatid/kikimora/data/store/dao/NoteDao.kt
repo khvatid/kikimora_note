@@ -11,19 +11,22 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NoteDao {
-
-  //  fun getNotes(): Flow<List<NoteEntity>>
+    @Query(value = "SELECT * FROM note_table")
+    fun getNotes(): Flow<List<NoteEntity>>
 
     @Query(value = "SELECT * FROM note_table WHERE id = :id")
     fun getNoteById(id: Int): Flow<NoteEntity>
-  //  fun getNoteWithContent(id: Int): Flow<NoteWithContent>
+
+    @Query("SELECT note_table.id AS noteId, title, content_table.id, type, content FROM note_table LEFT JOIN content_table ON note_table.id = content_table.noteId WHERE note_table.id = :id")
+    fun getNoteWithContent(id: Int): Flow<NoteWithContent>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun upsertNote(noteEntity: NoteEntity)
 
-    //fun upsertContent(contentEntity: ContentEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun upsertContent(contentEntity: ContentEntity)
 
-   // fun deleteContent(contentEntity: ContentEntity)
-   // fun deleteNote(noteEntity: NoteEntity)
+    // fun deleteContent(contentEntity: ContentEntity)
+    // fun deleteNote(noteEntity: NoteEntity)
 
 }

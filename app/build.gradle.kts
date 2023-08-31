@@ -60,7 +60,6 @@ dependencies {
     implementation(project(":core:navigation"))
 
     implementation(Deps.Android.coreKtx)
-    implementation(Deps.Android.splashScreen)
     implementation(Deps.Android.startUpRuntime)
     implementation(Deps.Android.navigationCompose)
     implementation(Deps.Android.activityCompose)

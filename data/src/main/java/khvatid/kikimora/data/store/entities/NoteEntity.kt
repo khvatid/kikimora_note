@@ -4,6 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import androidx.room.Relation
 
 
 @Entity(tableName = "note_table")
@@ -33,6 +34,11 @@ data class ContentEntity(
 
 data class NoteWithContent(
     @Embedded val note : NoteEntity,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "noteId"
+
+    )
     val content: List<ContentEntity>
 )
 
