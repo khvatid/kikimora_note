@@ -20,7 +20,7 @@ android {
 
 dependencies {
 
-    implementation(libs.androidCore.ktx)
-    implementation(libs.androidAppcompat)
+    implementation(Deps.Android.coreKtx)
+    implementation(Deps.Coroutines.android)
 
 }

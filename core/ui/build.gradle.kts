@@ -30,21 +30,21 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidCore.ktx)
-    implementation(libs.kotlinx.coroutines.android)
+    implementation(Deps.Android.coreKtx)
+    implementation(Deps.Coroutines.android)
 
     //Hilt
-    kapt(libs.dagger.hiltAndroidCompiler)
-    implementation(libs.dagger.hiltAndroid)
+    kapt(Deps.Hilt.compiler)
+    implementation(Deps.Hilt.android)
 
     //Compose
-    implementation(libs.androidCompose.ui)
-    implementation(libs.androidCompose.material3)
-    implementation(libs.androidCompose.tooling)
-    implementation(libs.androidNavigation.compose)
+    implementation(Deps.Compose.ui)
+    implementation(Deps.Compose.material3)
+    implementation(Deps.Compose.tooling)
+    implementation(Deps.Android.navigationCompose)
 
-    implementation(libs.androidLifecycle.runtimeKtx)
-    implementation(libs.androidLifecycle.viewModelCompose)
+    implementation(Deps.Lifecycle.runtimeKtx)
+    implementation(Deps.Lifecycle.viewModelCompose)
 
     implementation(project(":core:navigation"))
 }

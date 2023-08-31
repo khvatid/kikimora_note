@@ -15,17 +15,25 @@ android {
     kotlinOptions {
         jvmTarget = AndroidConfig.jvmTarget
     }
+
+
 }
+
+tasks.withType<Test>{
+    useJUnitPlatform()
+}
+
 
 dependencies {
 
-    implementation(libs.androidRoom.ktx)
-    kapt(libs.androidRoom.compiler)
-    implementation(libs.androidRoom.paging)
-    implementation(libs.androidRoom.runtime)
+    implementation(Deps.Room.ktx)
+    implementation(Deps.Room.paging)
+    implementation(Deps.Room.runtime)
+    kapt(Deps.Room.compiler)
+    testImplementation(Deps.Room.testing)
 
-    implementation(libs.androidCore.ktx)
-    implementation(libs.kotlinx.coroutines.android)
+    implementation(Deps.Android.coreKtx)
+    implementation(Deps.Coroutines.android)
 
 
 }

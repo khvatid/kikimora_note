@@ -59,22 +59,26 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(project(":core:navigation"))
 
-    implementation(libs.androidCore.ktx)
-    implementation(libs.androidCore.splashscreen)
-    implementation(libs.androidStartUp.runtime)
-    implementation(libs.kotlinx.coroutines.android)
+    implementation(Deps.Android.coreKtx)
+    implementation(Deps.Android.splashScreen)
+    implementation(Deps.Android.startUpRuntime)
+    implementation(Deps.Android.navigationCompose)
+    implementation(Deps.Android.activityCompose)
 
 
-    implementation(libs.androidLifecycle.runtimeKtx)
-    implementation(libs.androidLifecycle.viewModelCompose)
+    implementation(Deps.Coroutines.android)
 
+    implementation(Deps.Lifecycle.runtimeKtx)
+    implementation(Deps.Lifecycle.viewModelCompose)
 
     //Compose
-    implementation(libs.bundles.composeAppBundle)
-    debugImplementation(libs.bundles.composeDebugTestBundle)
+    implementation(Deps.Compose.ui)
+    implementation(Deps.Compose.tooling)
+    implementation(Deps.Compose.toolingPreview)
+    implementation(Deps.Compose.material3)
 
     //Hilt
-    kapt(libs.dagger.hiltAndroidCompiler)
-    implementation(libs.dagger.hiltAndroid)
-    implementation(libs.androidHilt.navigationCompose)
+    kapt(Deps.Hilt.compiler)
+    implementation(Deps.Hilt.android)
+    implementation(Deps.Hilt.navigation)
 }

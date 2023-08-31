@@ -41,17 +41,18 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidCore.ktx)
-    implementation(libs.androidAppcompat)
+    implementation(Deps.Android.coreKtx)
+    implementation(Deps.Coroutines.android)
 
-    kapt(libs.dagger.hiltAndroidCompiler)
-    implementation(libs.dagger.hiltAndroid)
-    implementation(libs.androidHilt.navigationCompose)
+    //Hilt
+    kapt(Deps.Hilt.compiler)
+    implementation(Deps.Hilt.android)
+    implementation(Deps.Hilt.navigation)
 
     //Compose x Coil
-    implementation(libs.androidCompose.ui)
-    implementation(libs.androidCompose.material3)
-    implementation(libs.androidCompose.tooling)
+    implementation(Deps.Compose.ui)
+    implementation(Deps.Compose.tooling)
+    implementation(Deps.Compose.material3)
 
     implementation(project(":core:navigation"))
     implementation(project(":core:ui"))

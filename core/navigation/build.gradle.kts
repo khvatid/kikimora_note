@@ -17,8 +17,8 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidCore.ktx)
+    implementation(Deps.Android.coreKtx)
 
-    implementation(libs.androidNavigation.compose)
+    implementation(Deps.Android.navigationCompose)
 
 }

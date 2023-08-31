@@ -17,7 +17,7 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidCore.ktx)
-    implementation(libs.kotlinx.coroutines.android)
+    implementation(Deps.Android.coreKtx)
+    implementation(Deps.Coroutines.android)
 
 }
