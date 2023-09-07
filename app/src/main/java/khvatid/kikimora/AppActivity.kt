@@ -4,9 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import dagger.hilt.android.AndroidEntryPoint
 import khvatid.core.ui.theme.CoreTheme
+import khvatid.kikimora.ui.AppScreen
 import khvatid.kikimora.ui.AppViewModel
 
 
@@ -19,7 +19,7 @@ class AppActivity : ComponentActivity() {
       super.onCreate(savedInstanceState)
       setContent {
          CoreTheme {
-
+            AppScreen(appViewModel = viewModel)
          }
       }
 

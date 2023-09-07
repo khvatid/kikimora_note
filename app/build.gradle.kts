@@ -58,6 +58,11 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":core:ui"))
     implementation(project(":core:navigation"))
+    implementation(project(":features:listNotes:domain"))
+    implementation(project(":features:listNotes:presentation"))
+    implementation(project(":features:note:domain"))
+    implementation(project(":features:note:presentation"))
+
 
     implementation(Deps.Android.coreKtx)
     implementation(Deps.Android.startUpRuntime)
