@@ -11,12 +11,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import khvatid.core.navigation.NavigationFlow
 import khvatid.core.ui.theme.CoreTheme
-import khvatid.kikimora.note.presentation.navigation.noteScreen
+import khvatid.kikimora.listNotes.presentation.navigation.listNotesGraph
+import khvatid.kikimora.note.presentation.navigation.navigateToNoteScreen
+import khvatid.kikimora.note.presentation.navigation.noteGraph
 
 
 data class AppScreenState(
     val navController: NavHostController,
-    val startDestination: NavigationFlow = NavigationFlow.Notes,
+    val startDestination: NavigationFlow = NavigationFlow.ListNotes,
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -30,7 +32,8 @@ fun AppScreen(appViewModel: AppViewModel) {
                 navController = state.navController,
                 startDestination = state.startDestination()
             ) {
-                noteScreen()
+                listNotesGraph(navigateToNote = state.navController::navigateToNoteScreen)
+                noteGraph()
             }
         }
     }

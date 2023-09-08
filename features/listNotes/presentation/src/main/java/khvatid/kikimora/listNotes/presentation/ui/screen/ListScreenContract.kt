@@ -1,4 +1,4 @@
-package khvatid.kikimora.listNotes.presentation.ui.screens.list
+package khvatid.kikimora.listNotes.presentation.ui.screen
 
 import khvatid.kikimora.listNotes.domain.model.NoteModel
 
