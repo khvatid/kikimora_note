@@ -32,6 +32,9 @@ tasks.withType<Test>{
 
 dependencies {
 
+    api(project(":features:listNotes:domain"))
+    api(project(":features:note:domain"))
+
     implementation(Deps.Room.ktx)
     implementation(Deps.Room.paging)
     implementation(Deps.Room.runtime)

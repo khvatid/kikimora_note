@@ -2,6 +2,7 @@ package khvatid.kikimora.data.store
 
 import android.content.Context
 import androidx.room.Room
+import khvatid.kikimora.data.store.source.NotesSource
 
 class Source(context: Context) {
 
@@ -11,7 +12,9 @@ class Source(context: Context) {
             .build()
     }
 
-
+    val notesSource : NotesSource by lazy {
+        NotesSource(database.getNoteDao())
+    }
 
 
 }

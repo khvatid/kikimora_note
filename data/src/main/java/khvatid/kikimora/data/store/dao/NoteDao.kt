@@ -21,7 +21,7 @@ interface NoteDao {
     fun getNoteWithContent(id: Int): Flow<NoteWithContent>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun upsertNote(noteEntity: NoteEntity)
+    fun upsertNote(noteEntity: NoteEntity): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun upsertContent(contentEntity: ContentEntity)

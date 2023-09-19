@@ -20,4 +20,7 @@ dependencies {
     implementation(Deps.Android.coreKtx)
     implementation(Deps.Coroutines.android)
 
+    
+    api(project(":features:listNotes:domain"))
+    api(project(":features:note:domain"))
 }

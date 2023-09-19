@@ -12,7 +12,8 @@ data class NoteEntity(
     @PrimaryKey
     val id : Int,
     val title: String,
-
+    val author: String,
+    val date: String
 )
 
 @Entity(tableName = "content_table",
@@ -37,11 +38,17 @@ data class NoteWithContent(
     @Relation(
         parentColumn = "id",
         entityColumn = "noteId"
-
     )
     val content: List<ContentEntity>
 )
 
+data class NoteWithContentCount(
+    val id: Int,
+    val title: String,
+    val author: String,
+    val date: String,
+    val contentCount: Int
+)
 
 /*
 data class Note(
