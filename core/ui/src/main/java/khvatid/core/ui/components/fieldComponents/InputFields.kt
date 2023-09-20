@@ -22,7 +22,6 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import khvatid.core.ui.components.MaskVisualTransformation
 import khvatid.core.ui.theme.CoreTheme
 
 
@@ -108,7 +107,7 @@ fun InputText(
 
 
 @Composable
-fun TransparentInputField(
+fun TransparentTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit = {},
@@ -153,33 +152,36 @@ fun TransparentInputField(
             contentPadding = PaddingValues(vertical = 12.dp, horizontal = 16.dp),
             container = {
                 TransparentContainer(
-                    isError = error,
-                    enabled = isEnabled,
-                    interactionSource = interactionSource,
-                    focusedBorderThickness = FocusedBorderThickness,
+                    isError = error
                 )
             }
         )
     }
 }
 
+sealed class FocusIndicator{
+    object Line : FocusIndicator()
+    object Outline : FocusIndicator()
+}
+
 @Composable
-fun OutlineInputField(
+fun StyledTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit = {},
-    placeholder: @Composable (() -> Unit)? = null,
-    title: @Composable (() -> Unit)? = null,
     error: Boolean = false,
     isEnabled: Boolean = true,
-    supportingText: @Composable (() -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     singleLine: Boolean = true,
     maxLines: Int = 5,
     readOnly: Boolean = false,
+    focusIndicator : FocusIndicator = FocusIndicator.Outline,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    placeholder: @Composable (() -> Unit)? = null,
+    supportingText: @Composable (() -> Unit)? = null,
+    title: @Composable (() -> Unit)? = null,
     trailingContent: @Composable (() -> Unit)? = null,
     leadingContent: @Composable (() -> Unit)? = null
 ) {
@@ -206,9 +208,6 @@ fun OutlineInputField(
         maxLines = maxLines,
         visualTransformation = visualTransformation,
         cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
-        onTextLayout = {
-
-        }
     ) { innerTextField ->
 
         InputDecorationBox(
@@ -227,6 +226,7 @@ fun OutlineInputField(
             contentPadding = PaddingValues(vertical = 12.dp, horizontal = 16.dp),
             container = {
                 BorderStrokeContainer(
+                    style = focusIndicator,
                     enabled = isEnabled,
                     isError = error,
                     interactionSource = interactionSource,
@@ -252,7 +252,7 @@ private fun Preview() {
 
         ) {
             Column(modifier = Modifier.padding(top = 100.dp)) {
-                TransparentInputField(
+                TransparentTextField(
                     value = value,
                     onValueChange = {
                         value = it

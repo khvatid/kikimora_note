@@ -10,15 +10,9 @@ import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
-import androidx.compose.material3.TextFieldColors
-import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.TextFieldDefaults.indicatorLine
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.State
@@ -41,7 +35,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.lerp
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 
 @Composable
 internal fun InputDecorationBox(
@@ -58,9 +51,9 @@ internal fun InputDecorationBox(
     trailingIcon: @Composable (() -> Unit)? = null,
     supportingText: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
-    container:@Composable () -> Unit = {},
+    container: @Composable () -> Unit = {},
 
-) {
+    ) {
 
     val transformedText = remember(value, visualTransformation) {
         visualTransformation.filter(AnnotatedString(value))
@@ -196,6 +189,7 @@ internal fun BorderStrokeContainer(
     interactionSource: InteractionSource,
     focusedBorderThickness: Dp,
     unfocusedBorderThickness: Dp,
+    style: FocusIndicator = FocusIndicator.Outline
 ) {
     val borderStroke = animateBorderStrokeAsState(
         enabled = enabled,
@@ -206,37 +200,32 @@ internal fun BorderStrokeContainer(
     )
     val background = containerBackgroundColor(isError = isError)
     Box(
-        Modifier
-            .border(border = borderStroke.value, shape = MaterialTheme.shapes.extraLarge)
-            .background(color = background.value, shape = MaterialTheme.shapes.extraLarge)
+        modifier = when (style) {
+            FocusIndicator.Line -> Modifier
+                .drawFocusedLine(indicatorBorder = borderStroke.value)
+                .background(color = background.value)
+
+            FocusIndicator.Outline -> Modifier
+                .border(
+                    border = borderStroke.value,
+                    shape = MaterialTheme.shapes.extraLarge
+                )
+                .background(color = background.value, shape = MaterialTheme.shapes.extraLarge)
+        }
     )
 }
+
 
 @Composable
 internal fun TransparentContainer(
-    enabled: Boolean,
     isError: Boolean,
-    interactionSource: InteractionSource,
-    focusedBorderThickness: Dp,
-    unfocusedBorderThickness: Dp = 0.dp,
 ) {
-
-    val borderStroke = animateBorderStrokeAsState(
-        enabled = enabled,
-        isError = isError,
-        interactionSource = interactionSource,
-        focusedBorderThickness = focusedBorderThickness,
-        unfocusedBorderThickness = unfocusedBorderThickness
-    )
-
     val background = containerBackgroundColor(isError = isError)
     Box(
         Modifier
-            .background(color = background.value, shape = RoundedCornerShape(12.dp))
-            //.drawFocusedLine(borderStroke.value)
+            .background(color = background.value)
     )
 }
-
 
 
 @Composable
