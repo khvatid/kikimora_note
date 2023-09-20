@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -22,7 +21,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import khvatid.core.ui.components.clearFocusOnKeyboardDismiss
-import khvatid.core.ui.components.inputField.NoteInputField
+import khvatid.core.ui.components.fieldComponents.TransparentInputField
 import khvatid.kikimora.note.presentation.ui.NoteScreenContract.Events
 
 @Composable
@@ -40,7 +39,6 @@ internal fun NoteScreen(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ScreenUi(
     state: NoteScreenContract.State,
@@ -68,7 +66,7 @@ private fun ScreenUi(
                     tint = MaterialTheme.colorScheme.outline
                 )
             }
-            NoteInputField(
+            /*TransparentInputField(
                 modifier = Modifier
                     .clearFocusOnKeyboardDismiss()
                     .weight(0.9f, fill = true),
@@ -84,9 +82,9 @@ private fun ScreenUi(
                             .copy(MaterialTheme.colorScheme.outline)
                     )
                 },
-            )
+            )*/
         }
-        NoteInputField(
+        /*TransparentInputField(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .clearFocusOnKeyboardDismiss(),
@@ -101,7 +99,7 @@ private fun ScreenUi(
                         .copy(MaterialTheme.colorScheme.outline)
                 )
             }
-        )
+        )*/
     }
 
 }

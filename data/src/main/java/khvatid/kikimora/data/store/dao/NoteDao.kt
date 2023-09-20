@@ -17,7 +17,7 @@ interface NoteDao {
     @Query(value = "SELECT * FROM note_table WHERE id = :id")
     fun getNoteById(id: Int): Flow<NoteEntity>
 
-    @Query("SELECT note_table.id AS noteId, title, content_table.id, type, content FROM note_table LEFT JOIN content_table ON note_table.id = content_table.noteId WHERE note_table.id = :id")
+    @Query("SELECT note_table.id AS noteId, title, author, date, content_table.id, type, content FROM note_table LEFT JOIN content_table ON note_table.id = content_table.noteId WHERE note_table.id = :id")
     fun getNoteWithContent(id: Int): Flow<NoteWithContent>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -8,7 +8,7 @@ import khvatid.kikimora.data.store.entities.NoteEntity
 
 
 @Database(
-    version = 1,
+    version = 2,
     entities = [NoteEntity::class, ContentEntity::class],
     exportSchema = false
 )
